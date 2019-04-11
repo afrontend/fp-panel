@@ -12,7 +12,6 @@ $ npm install --save fp-panel
 ```js
 const fpPanel = require('fp-panel');
 
-fpPanel('Rainbow');
 ```
 ## License
 
