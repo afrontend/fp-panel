@@ -10,7 +10,7 @@ $ npm install --save fp-panel
 ## Usage
 
 ```js
-const fpPanel = require('fp-panel');
+const p = require('fp-panel');
 
 ```
 ## License
