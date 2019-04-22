@@ -60,6 +60,7 @@
   "scripts": {
     "pretest": "eslint .",
     "test": "jest",
+    "test:c": "jest --coverage",
     "docs": "jsdoc --configure .jsdoc.json --verbose"
   },
   "repository": "https://github.com/afrontend/fp-panel.git",
