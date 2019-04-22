@@ -16,6 +16,7 @@
     "panel"
   ],
   "devDependencies": {
+    "boxy-jsdoc-template": "^2.0.2",
     "coveralls": "^3.0.2",
     "eslint": "^5.9.0",
     "eslint-config-prettier": "^3.3.0",
@@ -59,11 +60,14 @@
   "scripts": {
     "pretest": "eslint .",
     "test": "jest",
-    "doc": "jsdoc lib/index.js"
+    "docs": "jsdoc --configure .jsdoc.json --verbose"
   },
   "repository": "https://github.com/afrontend/fp-panel.git",
   "jest": {
     "testEnvironment": "node"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "tui-jsdoc-template": "^1.2.2"
+  }
 }
