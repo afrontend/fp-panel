@@ -11,8 +11,16 @@ $ npm install --save fp-panel
 
 ```js
 const p = require('fp-panel');
-
 ```
+
+Refer to [our documentation](https://github.com/afrontend/fp-panel/wiki) to learn more about using fp-panel
+
+These games use fp-panel.
+
+* [tetris](https://github.com/afrontend/fp-tetris)
+* [snake](https://github.com/afrontend/fp-snake)
+* [block](https://github.com/afrontend/fp-block)
+
 ## License
 
 MIT © [Bob Hwang](https://agvim.wordpress.com)
