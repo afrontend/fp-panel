@@ -1,4 +1,4 @@
-# [fp-panel](https://github.com/afrontend) *0.0.4*
+# [fp-panel](https://github.com/afrontend) *0.0.5*
 
 > library for fp-block
 
@@ -120,7 +120,7 @@ Check if an item color is NOT 'grey'
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| item | `object`  | object which has a color attribute | &nbsp; |
+| item | `object`  | a object which has a color attribute | &nbsp; |
 
 
 
@@ -153,7 +153,7 @@ Check if an item color is 'grey'
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| item | `object`  | object which has a color attribute | &nbsp; |
+| item | `object`  | a object which has a color attribute | &nbsp; |
 
 
 
