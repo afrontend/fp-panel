@@ -61,7 +61,7 @@
   "scripts": {
     "pretest": "eslint .",
     "test": "jest",
-    "test:c": "jest --coverage",
+    "coverage": "jest --coverage",
     "docs": "jsdoc --configure .jsdoc.json --verbose",
     "markdown": "doxdox 'lib/**/*.js' --layout markdown --output DOCUMENTATION.md"
   },
