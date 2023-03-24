@@ -17,9 +17,11 @@
   ],
   "devDependencies": {
     "husky": "^8.0.3",
-    "jest": "^29.5.0"
+    "jest": "^29.5.0",
+    "jsdoc-to-markdown": "^8.0.0"
   },
   "scripts": {
+    "doc": "jsdoc2md lib/index.js > DOCUMENTATION.md",
     "test": "jest",
     "coverage": "jest --coverage"
   },
