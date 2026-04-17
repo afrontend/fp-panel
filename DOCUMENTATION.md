@@ -39,30 +39,83 @@
 </dd>
 <dt><a href="#paint">paint(panel, posAry, color)</a> ⇒ <code>array</code></dt>
 <dd><p>Change a color attribute of some item of a panel</p>
+<pre><code>before:           after paint(positions, &#39;pink&#39;):
+ .  .  .  .  .    .  .  .  .  .
+ .  .  .  .  .    .  ■  .  .  .
+ .  .  .  .  .  → .  ■  ■  .  .
+ .  .  .  .  .    .  ■  .  .  .
+ .  .  .  .  .    .  .  .  .  .
+</code></pre>
 </dd>
 <dt><a href="#up">up(panel)</a> ⇒ <code>array</code></dt>
 <dd><p>Remove a top row of the panel and append an empty row to the bottom of the panel</p>
+<pre><code>before:        after:
+ .  .  .  .    ■  ■  .  .
+ ■  ■  .  .    .  .  .  .
+ .  .  .  .  → .  .  .  .
+ .  .  .  .    .  .  .  .
+</code></pre>
 </dd>
 <dt><a href="#down">down(panel)</a> ⇒ <code>array</code></dt>
 <dd><p>Remove a bottom row of the panel and append an empty row to the top of the panel</p>
+<pre><code>before:        after:
+ ■  ■  .  .    .  .  .  .
+ .  .  .  .    ■  ■  .  .
+ .  .  .  .  → .  .  .  .
+ .  .  .  .    .  .  .  .
+</code></pre>
 </dd>
 <dt><a href="#left">left(panel)</a> ⇒ <code>array</code></dt>
 <dd><p>Remove a left side of the panel and append an empty column to the right of the panel</p>
+<pre><code>before:           after:
+ .  ■  .  .  .    ■  .  .  .  .
+ .  ■  .  .  .    ■  .  .  .  .
+ .  ■  .  .  .  → ■  .  .  .  .
+ .  .  .  .  .    .  .  .  .  .
+</code></pre>
 </dd>
 <dt><a href="#right">right(panel)</a> ⇒ <code>array</code></dt>
 <dd><p>Remove a right side of the panel and append an empty column to the left of the panel</p>
+<pre><code>before:           after:
+ ■  .  .  .  .    .  ■  .  .  .
+ ■  .  .  .  .    .  ■  .  .  .
+ ■  .  .  .  .  → .  ■  .  .  .
+ .  .  .  .  .    .  .  .  .  .
+</code></pre>
 </dd>
 <dt><a href="#rotate">rotate(panel)</a> ⇒ <code>array</code></dt>
-<dd><p>Rotate some items which have a zeroPoint attribute</p>
+<dd><p>Rotate some items which have a zeroPoint attribute (90° clockwise around the zeroPoint)</p>
+<pre><code>before (● = zeroPoint):    after:
+ .  .  ■  .  .              .  .  .  .  .
+ .  .  ■  .  .              .  .  .  .  .
+ .  .  ●  ■  .            → .  .  ●  ■  ■
+ .  .  .  .  .              .  .  ■  .  .
+ .  .  .  .  .              .  .  .  .  .
+</code></pre>
 </dd>
 <dt><a href="#overlap">overlap(dPanel, sPanel)</a> ⇒ <code>array</code></dt>
 <dd><p>Two panels will be overlap</p>
+<pre><code>dPanel:      sPanel:      result:
+ ■  ■  .      .  .  .      ■  ■  .
+ .  .  .  +   .  .  ■  =   .  .  ■
+ .  .  ■      .  ■  .      .  ■  ■
+</code></pre>
 </dd>
 <dt><a href="#add">add(panelAry)</a> ⇒ <code>array</code></dt>
 <dd><p>All panels will be overlap. (panelA + panelB + ... = newPanel)</p>
+<pre><code>A:           B:           C:           add([A,B,C]):
+ ■  .  .      .  ■  .      .  .  ■      ■  ■  ■
+ ■  .  .  +   .  ■  .  +   .  .  ■  =   ■  ■  ■
+ ■  .  .      .  ■  .      .  .  ■      ■  ■  ■
+</code></pre>
 </dd>
 <dt><a href="#sub">sub(aPanel, bPanel)</a> ⇒ <code>array</code></dt>
 <dd><p>Two panels will be &quot;subtracted&quot;. (aPanel - bPanel = newPanel)</p>
+<pre><code>aPanel:      bPanel:      result:
+ ■  ■  ■      ■  .  .      .  ■  ■
+ ■  .  ■  -   .  .  ■  =   ■  .  .
+ .  ■  ■      .  ■  .      .  .  ■
+</code></pre>
 </dd>
 <dt><a href="#getTopMargin">getTopMargin(panel)</a> ⇒ <code>number</code></dt>
 <dd><p>Return a distance from some items that has a color attribute to the top of the panel</p>
@@ -72,9 +125,29 @@
 </dd>
 <dt><a href="#adjustToTop">adjustToTop(panel)</a> ⇒ <code>array</code></dt>
 <dd><p>Move some items that has a color attribute to the top of the panel</p>
+<pre><code>before:        after:
+ .  .  .  .    ■  ■  .  .
+ ■  ■  .  .    .  .  .  .
+ .  .  .  .  → .  .  .  .
+ .  .  .  .    .  .  .  .
+</code></pre>
 </dd>
 <dt><a href="#adjustToBottom">adjustToBottom(panel)</a> ⇒ <code>array</code></dt>
 <dd><p>Move some items that has a color attribute to the bottom of the panel</p>
+<pre><code>before:        after:
+ ■  ■  .  .    .  .  .  .
+ .  .  .  .    .  .  .  .
+ .  .  .  .  → .  .  .  .
+ .  .  .  .    ■  ■  .  .
+</code></pre>
+</dd>
+<dt><a href="#adjustToCenter">adjustToCenter(panel)</a> ⇒ <code>array</code></dt>
+<dd><p>Move some items to the horizontal center of the panel</p>
+<pre><code>before:              after:
+ ■  ■  .  .  .  .    .  ■  ■  .  .  .
+ .  .  .  .  .  .  → .  .  .  .  .  .
+ .  .  .  .  .  .    .  .  .  .  .  .
+</code></pre>
 </dd>
 </dl>
 
@@ -402,6 +475,15 @@ Collect all item, which zeroPoint attribute is true, from a panel
 ## paint(panel, posAry, color) ⇒ <code>array</code>
 Change a color attribute of some item of a panel
 
+```
+before:           after paint(positions, 'pink'):
+ .  .  .  .  .    .  .  .  .  .
+ .  .  .  .  .    .  ■  .  .  .
+ .  .  .  .  .  → .  ■  ■  .  .
+ .  .  .  .  .    .  ■  .  .  .
+ .  .  .  .  .    .  .  .  .  .
+```
+
 **Kind**: global function  
 **Returns**: <code>array</code> - new 2D array  
 
@@ -416,6 +498,14 @@ Change a color attribute of some item of a panel
 ## up(panel) ⇒ <code>array</code>
 Remove a top row of the panel and append an empty row to the bottom of the panel
 
+```
+before:        after:
+ .  .  .  .    ■  ■  .  .
+ ■  ■  .  .    .  .  .  .
+ .  .  .  .  → .  .  .  .
+ .  .  .  .    .  .  .  .
+```
+
 **Kind**: global function  
 **Returns**: <code>array</code> - new 2D array  
 
@@ -427,6 +517,14 @@ Remove a top row of the panel and append an empty row to the bottom of the panel
 
 ## down(panel) ⇒ <code>array</code>
 Remove a bottom row of the panel and append an empty row to the top of the panel
+
+```
+before:        after:
+ ■  ■  .  .    .  .  .  .
+ .  .  .  .    ■  ■  .  .
+ .  .  .  .  → .  .  .  .
+ .  .  .  .    .  .  .  .
+```
 
 **Kind**: global function  
 **Returns**: <code>array</code> - new 2D array  
@@ -440,6 +538,14 @@ Remove a bottom row of the panel and append an empty row to the top of the panel
 ## left(panel) ⇒ <code>array</code>
 Remove a left side of the panel and append an empty column to the right of the panel
 
+```
+before:           after:
+ .  ■  .  .  .    ■  .  .  .  .
+ .  ■  .  .  .    ■  .  .  .  .
+ .  ■  .  .  .  → ■  .  .  .  .
+ .  .  .  .  .    .  .  .  .  .
+```
+
 **Kind**: global function  
 **Returns**: <code>array</code> - new 2D array  
 
@@ -452,6 +558,14 @@ Remove a left side of the panel and append an empty column to the right of the p
 ## right(panel) ⇒ <code>array</code>
 Remove a right side of the panel and append an empty column to the left of the panel
 
+```
+before:           after:
+ ■  .  .  .  .    .  ■  .  .  .
+ ■  .  .  .  .    .  ■  .  .  .
+ ■  .  .  .  .  → .  ■  .  .  .
+ .  .  .  .  .    .  .  .  .  .
+```
+
 **Kind**: global function  
 **Returns**: <code>array</code> - new 2D array  
 
@@ -462,7 +576,16 @@ Remove a right side of the panel and append an empty column to the left of the p
 <a name="rotate"></a>
 
 ## rotate(panel) ⇒ <code>array</code>
-Rotate some items which have a zeroPoint attribute
+Rotate some items which have a zeroPoint attribute (90° clockwise around the zeroPoint)
+
+```
+before (● = zeroPoint):    after:
+ .  .  ■  .  .              .  .  .  .  .
+ .  .  ■  .  .              .  .  .  .  .
+ .  .  ●  ■  .            → .  .  ●  ■  ■
+ .  .  .  .  .              .  .  ■  .  .
+ .  .  .  .  .              .  .  .  .  .
+```
 
 **Kind**: global function  
 **Returns**: <code>array</code> - new 2D array  
@@ -475,6 +598,13 @@ Rotate some items which have a zeroPoint attribute
 
 ## overlap(dPanel, sPanel) ⇒ <code>array</code>
 Two panels will be overlap
+
+```
+dPanel:      sPanel:      result:
+ ■  ■  .      .  .  .      ■  ■  .
+ .  .  .  +   .  .  ■  =   .  .  ■
+ .  .  ■      .  ■  .      .  ■  ■
+```
 
 **Kind**: global function  
 **Returns**: <code>array</code> - new 2D array  
@@ -489,6 +619,13 @@ Two panels will be overlap
 ## add(panelAry) ⇒ <code>array</code>
 All panels will be overlap. (panelA + panelB + ... = newPanel)
 
+```
+A:           B:           C:           add([A,B,C]):
+ ■  .  .      .  ■  .      .  .  ■      ■  ■  ■
+ ■  .  .  +   .  ■  .  +   .  .  ■  =   ■  ■  ■
+ ■  .  .      .  ■  .      .  .  ■      ■  ■  ■
+```
+
 **Kind**: global function  
 **Returns**: <code>array</code> - new 2D array  
 
@@ -500,6 +637,13 @@ All panels will be overlap. (panelA + panelB + ... = newPanel)
 
 ## sub(aPanel, bPanel) ⇒ <code>array</code>
 Two panels will be "subtracted". (aPanel - bPanel = newPanel)
+
+```
+aPanel:      bPanel:      result:
+ ■  ■  ■      ■  .  .      .  ■  ■
+ ■  .  ■  -   .  .  ■  =   ■  .  .
+ .  ■  ■      .  ■  .      .  .  ■
+```
 
 **Kind**: global function  
 **Returns**: <code>array</code> - new 2D array  
@@ -538,6 +682,14 @@ Return a distance from some items that has a color attribute to the bottom of th
 ## adjustToTop(panel) ⇒ <code>array</code>
 Move some items that has a color attribute to the top of the panel
 
+```
+before:        after:
+ .  .  .  .    ■  ■  .  .
+ ■  ■  .  .    .  .  .  .
+ .  .  .  .  → .  .  .  .
+ .  .  .  .    .  .  .  .
+```
+
 **Kind**: global function  
 **Returns**: <code>array</code> - new 2D array  
 
@@ -549,6 +701,33 @@ Move some items that has a color attribute to the top of the panel
 
 ## adjustToBottom(panel) ⇒ <code>array</code>
 Move some items that has a color attribute to the bottom of the panel
+
+```
+before:        after:
+ ■  ■  .  .    .  .  .  .
+ .  .  .  .    .  .  .  .
+ .  .  .  .  → .  .  .  .
+ .  .  .  .    ■  ■  .  .
+```
+
+**Kind**: global function  
+**Returns**: <code>array</code> - new 2D array  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| panel | <code>array</code> | the panel is a 2D array which some items have a color attribute |
+
+<a name="adjustToCenter"></a>
+
+## adjustToCenter(panel) ⇒ <code>array</code>
+Move some items to the horizontal center of the panel
+
+```
+before:              after:
+ ■  ■  .  .  .  .    .  ■  ■  .  .  .
+ .  .  .  .  .  .  → .  .  .  .  .  .
+ .  .  .  .  .  .    .  .  .  .  .  .
+```
 
 **Kind**: global function  
 **Returns**: <code>array</code> - new 2D array  
