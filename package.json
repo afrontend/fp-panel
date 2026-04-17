@@ -21,6 +21,7 @@
   },
   "scripts": {
     "doc": "jsdoc2md lib/index.js > DOCUMENTATION.md",
+    "prepublishOnly": "npm run doc && npm test",
     "test": "jest",
     "coverage": "jest --coverage"
   },
