@@ -149,6 +149,36 @@
  .  .  .  .  .  .    .  .  .  .  .  .
 </code></pre>
 </dd>
+<dt><a href="#snapshot">snapshot(history, panel)</a> ⇒ <code>array</code></dt>
+<dd><p>Append the current panel state to a history array (immutably)</p>
+<pre><code>panel (p2):           snapshot(history, panel):
+ .  ■  .               history: [p0, p1] → [p0, p1, p2]
+ .  ■  .
+ .  .  .
+</code></pre>
+</dd>
+<dt><a href="#rewind">rewind(history, [steps])</a> ⇒ <code>array</code></dt>
+<dd><p>Retrieve a panel state from N steps ago in the history</p>
+<pre><code>history: [ p0,       p1,       p2      ]
+           oldest              latest
+
+rewind(history, 0) → p2   (current)
+rewind(history, 1) → p1   (1 step ago)
+rewind(history, 2) → p0   (2 steps ago)
+</code></pre>
+</dd>
+<dt><a href="#trace">trace(fns)</a> ⇒ <code>function</code></dt>
+<dd><p>Apply a pipeline of panel transformations and capture every intermediate state</p>
+<pre><code>trace([right, down])(panel):
+
+step 0:      step 1 (right):  step 2 (down):
+ ■  .  .      .  ■  .          .  .  .
+ .  .  .  →   .  .  .    →     .  ■  .
+ .  .  .      .  .  .          .  .  .
+
+→ { panel: step2, history: [step0, step1, step2] }
+</code></pre>
+</dd>
 </dl>
 
 <a name="createItem"></a>
@@ -735,4 +765,102 @@ before:              after:
 | Param | Type | Description |
 | --- | --- | --- |
 | panel | <code>array</code> | the panel is a 2D array which some items have a color attribute |
+
+<a name="snapshot"></a>
+
+## snapshot(history, panel) ⇒ <code>array</code>
+Append the current panel state to a history array (immutably)
+
+```
+panel (p2):           snapshot(history, panel):
+ .  ■  .               history: [p0, p1] → [p0, p1, p2]
+ .  ■  .
+ .  .  .
+
+Each call returns a new array — the original history is never mutated.
+```
+
+**Kind**: global function  
+**Returns**: <code>array</code> - new history array with panel appended  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| history | <code>array</code> | array of past panel states |
+| panel | <code>array</code> | the panel is a 2D array which some items have a color attribute |
+
+**Example**  
+```js
+let history = [];
+history = snapshot(history, panel0); // [panel0]
+history = snapshot(history, panel1); // [panel0, panel1]
+history = snapshot(history, panel2); // [panel0, panel1, panel2]
+```
+
+<a name="rewind"></a>
+
+## rewind(history, [steps]) ⇒ <code>array</code>
+Retrieve a panel state from N steps ago in the history
+
+```
+history: [ p0,       p1,       p2      ]
+           oldest              latest
+
+p0:        p1:        p2 (latest):
+ ■  .  .    .  ■  .    .  .  ■
+ .  .  .    .  .  .    .  .  .
+
+rewind(history, 0) → p2   (current)
+rewind(history, 1) → p1   (1 step ago)
+rewind(history, 2) → p0   (2 steps ago)
+```
+
+**Kind**: global function  
+**Returns**: <code>array</code> - panel state from N steps ago (cloned)  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| history | <code>array</code> | | array of past panel states |
+| [steps] | <code>number</code> | <code>1</code> | number of steps to go back (default: 1) |
+
+**Example**  
+```js
+rewind(history, 0); // latest panel
+rewind(history, 1); // one step ago
+rewind(history);    // one step ago (default)
+```
+
+<a name="trace"></a>
+
+## trace(fns) ⇒ <code>function</code>
+Apply a pipeline of panel transformations and capture every intermediate state
+
+```
+trace([right, down])(panel):
+
+step 0:      step 1 (right):  step 2 (down):
+ ■  .  .      .  ■  .          .  .  .
+ .  .  .  →   .  .  .    →     .  ■  .
+ .  .  .      .  .  .          .  .  .
+
+→ { panel: step2, history: [step0, step1, step2] }
+```
+
+Since every fp-panel function is pure, each step produces an independent
+snapshot — replaying or rewinding is as simple as indexing into history.
+
+**Kind**: global function  
+**Returns**: <code>function</code> - a function that takes an initial panel and returns `{ panel, history }`  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| fns | <code>array</code> | array of panel-transform functions to apply in sequence |
+
+**Example**  
+```js
+const { panel, history } = trace([right, right, down])(initialPanel);
+// panel   — final result after all transforms
+// history — [initial, afterRight, afterRight2, afterDown]
+
+rewind(history, 1); // → afterRight2 (one step before final)
+```
 
