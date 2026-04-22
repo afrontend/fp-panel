@@ -1,6 +1,6 @@
 {
   "name": "fp-panel",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "library for fp-block",
   "homepage": "https://github.com/afrontend",
   "author": {
@@ -25,7 +25,10 @@
     "test": "jest",
     "coverage": "jest --coverage"
   },
-  "repository": "https://github.com/afrontend/fp-panel.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/afrontend/fp-panel.git"
+  },
   "jest": {
     "testEnvironment": "node"
   },

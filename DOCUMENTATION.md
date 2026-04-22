@@ -9,33 +9,76 @@
 </dd>
 <dt><a href="#createPanel">createPanel(rows, columns)</a> ⇒ <code>array</code></dt>
 <dd><p>Create a 2D array, which has a default value as { color: &#39;grey&#39; }</p>
+<pre><code>createPanel(2, 3):
+ .  .  .
+ .  .  .
+</code></pre>
 </dd>
-<dt><a href="#isItem">isItem(item)</a> ⇒ <code>boolean</code></dt>
-<dd><p>Check if an item color is NOT &#39;grey&#39;</p>
+<dt><a href="#isFilled">isFilled(cell)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Check if a cell color is NOT &#39;grey&#39; (i.e. the cell is filled)</p>
+<pre><code>isFilled(■) → true
+isFilled(.) → false
+</code></pre>
 </dd>
 <dt><a href="#isBlankItem">isBlankItem(item)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check if an item color is &#39;grey&#39;</p>
+<pre><code>isBlankItem(.) → true
+isBlankItem(■) → false
+</code></pre>
 </dd>
 <dt><a href="#isBlankPanel">isBlankPanel(panel)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check if all items color in panel is &#39;grey&#39;</p>
+<pre><code>aPanel (all grey) → true:    bPanel (has pink) → false:
+ .  .                          .  ■
+ .  .                          .  .
+</code></pre>
 </dd>
 <dt><a href="#isOverlap">isOverlap(aPanel, bPanel)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check if panels were overlapped</p>
+<pre><code>aPanel:    bPanel:    isOverlap → true
+ .  ■       .  ■      (column 1 row 0 collides)
+ .  .       .  .
+
+aPanel:    bPanel:    isOverlap → false
+ ■  .       .  ■      (no position collides)
+ .  .       .  .
+</code></pre>
 </dd>
 <dt><a href="#isOverlapPanels">isOverlapPanels(aPanel, panels)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check if panels were overlapped</p>
+<pre><code>aPanel:    bPanel1:   bPanel2:   isOverlapPanels(aPanel, [bPanel1, bPanel2]) → false
+ .  ■       .  .       .  .      (aPanel does not collide with either panel)
+ .  .       .  .       .  ■
+</code></pre>
 </dd>
 <dt><a href="#isOnTheLeftEdge">isOnTheLeftEdge(panel)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check if some color item is on the left edge of a panel</p>
+<pre><code>→ true:      → false:
+ ■  .  .      .  ■  .
+ ■  .  .      .  .  .
+</code></pre>
 </dd>
 <dt><a href="#isOnTheRightEdge">isOnTheRightEdge(panel)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check if some color item is on the right edge of a panel</p>
+<pre><code>→ true:      → false:
+ .  .  ■      .  ■  .
+ .  .  ■      .  .  .
+</code></pre>
 </dd>
 <dt><a href="#isOnTheBottomEdge">isOnTheBottomEdge(panel)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check if some color item is on the bottom edge of a panel</p>
+<pre><code>→ true:      → false:
+ .  .  .      .  ■  .
+ ■  ■  .      .  .  .
+</code></pre>
 </dd>
 <dt><a href="#getZeroPoints">getZeroPoints(panel)</a> ⇒ <code>array</code></dt>
 <dd><p>Collect all item, which zeroPoint attribute is true, from a panel</p>
+<pre><code>panel (● = zeroPoint):    result:
+ .  .  .                   [{ row: 1, column: 1 }]
+ .  ●  .
+ .  .  .
+</code></pre>
 </dd>
 <dt><a href="#paint">paint(panel, posAry, color)</a> ⇒ <code>array</code></dt>
 <dd><p>Change a color attribute of some item of a panel</p>
@@ -119,9 +162,21 @@
 </dd>
 <dt><a href="#getTopMargin">getTopMargin(panel)</a> ⇒ <code>number</code></dt>
 <dd><p>Return a distance from some items that has a color attribute to the top of the panel</p>
+<pre><code>panel:         getTopMargin → 2
+ .  .  .  .
+ .  .  .  .
+ ■  ■  .  .
+ .  .  .  .
+</code></pre>
 </dd>
 <dt><a href="#getBottomMargin">getBottomMargin(panel)</a> ⇒ <code>number</code></dt>
 <dd><p>Return a distance from some items that has a color attribute to the bottom of the panel</p>
+<pre><code>panel:         getBottomMargin → 2
+ .  .  .  .
+ ■  ■  .  .
+ .  .  .  .
+ .  .  .  .
+</code></pre>
 </dd>
 <dt><a href="#adjustToTop">adjustToTop(panel)</a> ⇒ <code>array</code></dt>
 <dd><p>Move some items that has a color attribute to the top of the panel</p>
@@ -149,18 +204,32 @@
  .  .  .  .  .  .    .  .  .  .  .  .
 </code></pre>
 </dd>
+<dt><a href="#adjustToRandomCenter">adjustToRandomCenter(panel)</a> ⇒ <code>array</code></dt>
+<dd><p>Move some items to a random horizontal position within the available space</p>
+<pre><code>before:              after (one possibility):
+ ■  ■  .  .  .  .    .  .  ■  ■  .  .
+ .  .  .  .  .  .  → .  .  .  .  .  .
+ .  .  .  .  .  .    .  .  .  .  .  .
+</code></pre>
+</dd>
 <dt><a href="#snapshot">snapshot(history, panel)</a> ⇒ <code>array</code></dt>
 <dd><p>Append the current panel state to a history array (immutably)</p>
 <pre><code>panel (p2):           snapshot(history, panel):
  .  ■  .               history: [p0, p1] → [p0, p1, p2]
  .  ■  .
  .  .  .
+
+Each call returns a new array — the original history is never mutated.
 </code></pre>
 </dd>
-<dt><a href="#rewind">rewind(history, [steps])</a> ⇒ <code>array</code></dt>
+<dt><a href="#rewind">rewind(history, steps)</a> ⇒ <code>array</code></dt>
 <dd><p>Retrieve a panel state from N steps ago in the history</p>
 <pre><code>history: [ p0,       p1,       p2      ]
            oldest              latest
+
+p0:        p1:        p2 (latest):
+ ■  .  .    .  ■  .    .  .  ■
+ .  .  .    .  .  .    .  .  .
 
 rewind(history, 0) → p2   (current)
 rewind(history, 1) → p1   (1 step ago)
@@ -178,6 +247,8 @@ step 0:      step 1 (right):  step 2 (down):
 
 → { panel: step2, history: [step0, step1, step2] }
 </code></pre>
+<p>Since every fp-panel function is pure, each step produces an independent
+snapshot — replaying or rewinding is as simple as indexing into history.</p>
 </dd>
 </dl>
 
@@ -220,6 +291,12 @@ createZeroItem('pink');
 ## createPanel(rows, columns) ⇒ <code>array</code>
 Create a 2D array, which has a default value as { color: 'grey' }
 
+```
+createPanel(2, 3):
+ .  .  .
+ .  .  .
+```
+
 **Kind**: global function  
 **Returns**: <code>array</code> - 2D array with color initial value  
 
@@ -242,29 +319,39 @@ createPanel(2, 2);
 //   ]
 // ]
 ```
-<a name="isItem"></a>
+<a name="isFilled"></a>
 
-## isItem(item) ⇒ <code>boolean</code>
-Check if an item color is NOT 'grey'
+## isFilled(cell) ⇒ <code>boolean</code>
+Check if a cell color is NOT 'grey' (i.e. the cell is filled)
+
+```
+isFilled(■) → true
+isFilled(.) → false
+```
 
 **Kind**: global function  
-**Returns**: <code>boolean</code> - true if an item color is NOT 'grey', otherwise false  
+**Returns**: <code>boolean</code> - true if a cell color is NOT 'grey', otherwise false  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| item | <code>object</code> | a object which has a color attribute |
+| cell | <code>object</code> | a object which has a color attribute |
 
 **Example**  
 ```js
-isItem({ color: 'grey' });
+isFilled({ color: 'grey' });
 // return false
-isItem({ color: 'pink' });
+isFilled({ color: 'pink' });
 // return true
 ```
 <a name="isBlankItem"></a>
 
 ## isBlankItem(item) ⇒ <code>boolean</code>
 Check if an item color is 'grey'
+
+```
+isBlankItem(.) → true
+isBlankItem(■) → false
+```
 
 **Kind**: global function  
 **Returns**: <code>boolean</code> - true if an item color is 'grey', otherwise false  
@@ -284,6 +371,12 @@ isBlankItem({ color: 'pink' });
 
 ## isBlankPanel(panel) ⇒ <code>boolean</code>
 Check if all items color in panel is 'grey'
+
+```
+aPanel (all grey) → true:    bPanel (has pink) → false:
+ .  .                          .  ■
+ .  .                          .  .
+```
 
 **Kind**: global function  
 **Returns**: <code>boolean</code> - true if all item color is 'grey', otherwise false  
@@ -325,6 +418,16 @@ isBlankPanel(bPanel);
 ## isOverlap(aPanel, bPanel) ⇒ <code>boolean</code>
 Check if panels were overlapped
 
+```
+aPanel:    bPanel:    isOverlap → true
+ .  ■       .  ■      (column 1 row 0 collides)
+ .  .       .  .
+
+aPanel:    bPanel:    isOverlap → false
+ ■  .       .  ■      (no position collides)
+ .  .       .  .
+```
+
 **Kind**: global function  
 **Returns**: <code>boolean</code> - true if two panels were overlapped, otherwise false  
 
@@ -362,6 +465,12 @@ isOverlap(aPanel, bPanel);
 
 ## isOverlapPanels(aPanel, panels) ⇒ <code>boolean</code>
 Check if panels were overlapped
+
+```
+aPanel:    bPanel1:   bPanel2:   isOverlapPanels(aPanel, [bPanel1, bPanel2]) → false
+ .  ■       .  .       .  .      (aPanel does not collide with either panel)
+ .  .       .  .       .  ■
+```
 
 **Kind**: global function  
 **Returns**: <code>boolean</code> - true if aPanel were overlapped with one of the panels, otherwise false  
@@ -412,6 +521,12 @@ isOverlapPanels(aPanel, panels);
 ## isOnTheLeftEdge(panel) ⇒ <code>boolean</code>
 Check if some color item is on the left edge of a panel
 
+```
+→ true:      → false:
+ ■  .  .      .  ■  .
+ ■  .  .      .  .  .
+```
+
 **Kind**: global function  
 **Returns**: <code>boolean</code> - true if some item is on the left edge of a panel, otherwise false  
 
@@ -438,6 +553,12 @@ isOnTheLeftEdge(panel)
 
 ## isOnTheRightEdge(panel) ⇒ <code>boolean</code>
 Check if some color item is on the right edge of a panel
+
+```
+→ true:      → false:
+ .  .  ■      .  ■  .
+ .  .  ■      .  .  .
+```
 
 **Kind**: global function  
 **Returns**: <code>boolean</code> - true if some item is on the right edge of a panel, otherwise false  
@@ -466,6 +587,12 @@ isOnTheRightEdge(panel)
 ## isOnTheBottomEdge(panel) ⇒ <code>boolean</code>
 Check if some color item is on the bottom edge of a panel
 
+```
+→ true:      → false:
+ .  .  .      .  ■  .
+ ■  ■  .      .  .  .
+```
+
 **Kind**: global function  
 **Returns**: <code>boolean</code> - true if some item is on the bottom edge of a panel, otherwise false  
 
@@ -492,6 +619,13 @@ isOnTheBottomEdge(panel)
 
 ## getZeroPoints(panel) ⇒ <code>array</code>
 Collect all item, which zeroPoint attribute is true, from a panel
+
+```
+panel (● = zeroPoint):    result:
+ .  .  .                   [{ row: 1, column: 1 }]
+ .  ●  .
+ .  .  .
+```
 
 **Kind**: global function  
 **Returns**: <code>array</code> - a structure of each array element is { row: x, column: y }  
@@ -688,6 +822,14 @@ aPanel:      bPanel:      result:
 ## getTopMargin(panel) ⇒ <code>number</code>
 Return a distance from some items that has a color attribute to the top of the panel
 
+```
+panel:         getTopMargin → 2
+ .  .  .  .
+ .  .  .  .
+ ■  ■  .  .
+ .  .  .  .
+```
+
 **Kind**: global function  
 **Returns**: <code>number</code> - number of blank rows from the top  
 
@@ -699,6 +841,14 @@ Return a distance from some items that has a color attribute to the top of the p
 
 ## getBottomMargin(panel) ⇒ <code>number</code>
 Return a distance from some items that has a color attribute to the bottom of the panel
+
+```
+panel:         getBottomMargin → 2
+ .  .  .  .
+ ■  ■  .  .
+ .  .  .  .
+ .  .  .  .
+```
 
 **Kind**: global function  
 **Returns**: <code>number</code> - number of blank rows from the bottom  
@@ -766,6 +916,25 @@ before:              after:
 | --- | --- | --- |
 | panel | <code>array</code> | the panel is a 2D array which some items have a color attribute |
 
+<a name="adjustToRandomCenter"></a>
+
+## adjustToRandomCenter(panel) ⇒ <code>array</code>
+Move some items to a random horizontal position within the available space
+
+```
+before:              after (one possibility):
+ ■  ■  .  .  .  .    .  .  ■  ■  .  .
+ .  .  .  .  .  .  → .  .  .  .  .  .
+ .  .  .  .  .  .    .  .  .  .  .  .
+```
+
+**Kind**: global function  
+**Returns**: <code>array</code> - new 2D array  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| panel | <code>array</code> | the panel is a 2D array which some items have a color attribute |
+
 <a name="snapshot"></a>
 
 ## snapshot(history, panel) ⇒ <code>array</code>
@@ -795,10 +964,9 @@ history = snapshot(history, panel0); // [panel0]
 history = snapshot(history, panel1); // [panel0, panel1]
 history = snapshot(history, panel2); // [panel0, panel1, panel2]
 ```
-
 <a name="rewind"></a>
 
-## rewind(history, [steps]) ⇒ <code>array</code>
+## rewind(history, steps) ⇒ <code>array</code>
 Retrieve a panel state from N steps ago in the history
 
 ```
@@ -819,8 +987,8 @@ rewind(history, 2) → p0   (2 steps ago)
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
-| history | <code>array</code> | | array of past panel states |
-| [steps] | <code>number</code> | <code>1</code> | number of steps to go back (default: 1) |
+| history | <code>array</code> |  | array of past panel states |
+| steps | <code>number</code> | <code>1</code> | number of steps to go back (default: 1) |
 
 **Example**  
 ```js
@@ -828,7 +996,6 @@ rewind(history, 0); // latest panel
 rewind(history, 1); // one step ago
 rewind(history);    // one step ago (default)
 ```
-
 <a name="trace"></a>
 
 ## trace(fns) ⇒ <code>function</code>
@@ -849,7 +1016,7 @@ Since every fp-panel function is pure, each step produces an independent
 snapshot — replaying or rewinding is as simple as indexing into history.
 
 **Kind**: global function  
-**Returns**: <code>function</code> - a function that takes an initial panel and returns `{ panel, history }`  
+**Returns**: <code>function</code> - a function that takes an initial panel and returns { panel, history }  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -860,7 +1027,5 @@ snapshot — replaying or rewinding is as simple as indexing into history.
 const { panel, history } = trace([right, right, down])(initialPanel);
 // panel   — final result after all transforms
 // history — [initial, afterRight, afterRight2, afterDown]
-
 rewind(history, 1); // → afterRight2 (one step before final)
 ```
-
