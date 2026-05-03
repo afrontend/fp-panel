@@ -250,6 +250,29 @@ step 0:      step 1 (right):  step 2 (down):
 <p>Since every fp-panel function is pure, each step produces an independent
 snapshot — replaying or rewinding is as simple as indexing into history.</p>
 </dd>
+<dt><a href="#canRotate">canRotate(bgPanel, toolPanel)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Check if a tool panel can be rotated without clipping or overlapping the background</p>
+<pre><code>bgPanel:     toolPanel:     canRotate → true
+ .  .  .      .  ■  .       (rotation stays in bounds and doesn&#39;t hit bg)
+ .  .  .      .  ●  .
+ .  .  .      .  .  .
+
+bgPanel:     toolPanel:     canRotate → false
+ ■  ■  ■      .  ■  .       (rotated piece overlaps bgPanel)
+ .  .  .      .  ●  .
+ .  .  .      .  .  .
+</code></pre>
+</dd>
+<dt><a href="#removeFullRows">removeFullRows(panel)</a> ⇒ <code>array</code></dt>
+<dd><p>Remove all full rows from a panel and pad the top with empty rows</p>
+<p>A row is considered full when every cell is filled (no grey cells remain).
+The panel height is preserved: for each removed row, one empty row is added at the top.</p>
+<pre><code>before (columns=4):      after:
+ .  ■  .  .               .  .  .  .   ← new empty row
+ ■  ■  ■  ■   (full)  →   .  ■  .  .
+ .  ■  .  ■               .  ■  .  ■
+</code></pre>
+</dd>
 </dl>
 
 <a name="createItem"></a>
@@ -1029,3 +1052,50 @@ const { panel, history } = trace([right, right, down])(initialPanel);
 // history — [initial, afterRight, afterRight2, afterDown]
 rewind(history, 1); // → afterRight2 (one step before final)
 ```
+<a name="canRotate"></a>
+
+## canRotate(bgPanel, toolPanel) ⇒ <code>boolean</code>
+Check if a tool panel can be rotated without clipping or overlapping the background
+
+```
+bgPanel:     toolPanel:     canRotate → true
+ .  .  .      .  ■  .       (rotation stays in bounds and doesn't hit bg)
+ .  .  .      .  ●  .
+ .  .  .      .  .  .
+
+bgPanel:     toolPanel:     canRotate → false
+ ■  ■  ■      .  ■  .       (rotated piece overlaps bgPanel)
+ .  .  .      .  ●  .
+ .  .  .      .  .  .
+```
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> - true if the rotation is valid, otherwise false  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| bgPanel | <code>array</code> | the fixed background panel |
+| toolPanel | <code>array</code> | the moving piece panel (must contain a zeroPoint cell) |
+
+<a name="removeFullRows"></a>
+
+## removeFullRows(panel) ⇒ <code>array</code>
+Remove all full rows from a panel and pad the top with empty rows
+
+A row is considered full when every cell is filled (no grey cells remain).
+The panel height is preserved: for each removed row, one empty row is added at the top.
+
+```
+before (columns=4):      after:
+ .  ■  .  .               .  .  .  .   ← new empty row
+ ■  ■  ■  ■   (full)  →   .  ■  .  .
+ .  ■  .  ■               .  ■  .  ■
+```
+
+**Kind**: global function  
+**Returns**: <code>array</code> - new 2D array with full rows removed and empty rows prepended  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| panel | <code>array</code> | the panel is a 2D array which some items have a color attribute |
+
