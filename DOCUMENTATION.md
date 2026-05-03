@@ -57,16 +57,16 @@ before (● = zeroPoint):    after rotate():
 
 | Category | Functions |
 |----------|-----------|
-| **Create** | `createPanel`, `createItem`, `createZeroItem` |
-| **Query** | `isFilled`, `isBlankItem`, `isBlankPanel` |
-| **Collision** | `isOverlap`, `isOverlapPanels`, `isOnTheLeftEdge`, `isOnTheRightEdge`, `isOnTheBottomEdge` |
-| **Move** | `up`, `down`, `left`, `right` |
-| **Align** | `adjustToTop`, `adjustToBottom`, `adjustToCenter`, `adjustToRandomCenter`, `getTopMargin`, `getBottomMargin` |
-| **Draw** | `paint`, `getZeroPoints` |
-| **Combine** | `overlap`, `add`, `sub` |
-| **Rotate** | `rotate`, `canRotate` |
-| **Game logic** | `removeFullRows` |
-| **History** | `snapshot`, `rewind`, `trace` |
+| **Create** | [`createPanel`](#createPanel), [`createItem`](#createItem), [`createZeroItem`](#createZeroItem) |
+| **Query** | [`isFilled`](#isFilled), [`isBlankItem`](#isBlankItem), [`isBlankPanel`](#isBlankPanel) |
+| **Collision** | [`isOverlap`](#isOverlap), [`isOverlapPanels`](#isOverlapPanels), [`isOnTheLeftEdge`](#isOnTheLeftEdge), [`isOnTheRightEdge`](#isOnTheRightEdge), [`isOnTheBottomEdge`](#isOnTheBottomEdge) |
+| **Move** | [`up`](#up), [`down`](#down), [`left`](#left), [`right`](#right) |
+| **Align** | [`adjustToTop`](#adjustToTop), [`adjustToBottom`](#adjustToBottom), [`adjustToCenter`](#adjustToCenter), [`adjustToRandomCenter`](#adjustToRandomCenter), [`getTopMargin`](#getTopMargin), [`getBottomMargin`](#getBottomMargin) |
+| **Draw** | [`paint`](#paint), [`getZeroPoints`](#getZeroPoints) |
+| **Combine** | [`overlap`](#overlap), [`add`](#add), [`sub`](#sub) |
+| **Rotate** | [`rotate`](#rotate), [`canRotate`](#canRotate) |
+| **Game logic** | [`removeFullRows`](#removeFullRows) |
+| **History** | [`snapshot`](#snapshot), [`rewind`](#rewind), [`trace`](#trace) |
 
 ---
 
