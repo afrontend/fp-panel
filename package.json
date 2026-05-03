@@ -20,7 +20,7 @@
     "jsdoc-to-markdown": "^9.1.3"
   },
   "scripts": {
-    "doc": "jsdoc2md lib/index.js > DOCUMENTATION.md",
+    "doc": "{ cat docs/overview.md; echo; jsdoc2md --global-index-format table --heading-depth 3 lib/index.js | sed '/^### Functions$/d'; } > DOCUMENTATION.md",
     "prepublishOnly": "npm run doc && npm test",
     "test": "jest",
     "coverage": "jest --coverage"
