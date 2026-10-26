@@ -32,6 +32,7 @@ npm run doc       # regenerate DOCUMENTATION.md (docs/overview.md + jsdoc2md of 
 
 - `lib/index.js` — the whole library (CJS, hand-written source, not build output)
 - `lib/__tests__/index.test.js` — jest tests
+- `.github/workflows/test.yml` — `npm test` on push to `master` and on PRs; actions are SHA-pinned and updated via Dependabot (`.github/dependabot.yml`), Node 24
 - `docs/overview.md` — narrative docs prepended to `DOCUMENTATION.md`
 
 ## Architecture
