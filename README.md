@@ -19,7 +19,6 @@ These games use fp-panel.
 - [tetris](https://github.com/afrontend/fp-tetris)
 - [snake](https://github.com/afrontend/fp-snake)
 - [block](https://github.com/afrontend/fp-block)
-- [space](https://github.com/afrontend/fp-space)
 
 ## How it works
 

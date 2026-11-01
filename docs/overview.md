@@ -91,7 +91,7 @@ const piece = pipe(
 )(p.createPanel(rows, cols));
 ```
 
-Used by: **fp-tetris** (tetromino spawn), **fp-block** / **fp-space** (shuttle placement)
+Used by: **fp-tetris** (tetromino spawn), **fp-block** (shuttle placement)
 
 ---
 
@@ -107,7 +107,7 @@ const canMoveLeft =
 if (canMoveLeft) piece = p.left(piece);
 ```
 
-Used by: **fp-tetris**, **fp-block**, **fp-space** (left / right key handlers)
+Used by: **fp-tetris**, **fp-block** (left / right key handlers)
 
 ---
 
@@ -149,7 +149,7 @@ const display = p.add([
 ]);
 ```
 
-Used by: **fp-block**, **fp-space**
+Used by: **fp-block**
 
 ---
 
@@ -162,7 +162,7 @@ const nextMissile   = p.sub(missilePanel, meteoritePanel);
 const nextMeteorite = p.sub(meteoritePanel, missilePanel);
 ```
 
-Used by: **fp-block**, **fp-space** (missile vs. meteorite)
+Used by: **fp-block** (missile vs. meteorite)
 
 ---
 

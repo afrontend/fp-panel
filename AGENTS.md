@@ -12,7 +12,6 @@ fp-panel  ← this repo
    ├─ fp-tetris ── fp-tetris-game
    ├─ fp-block  ── fp-block-game
    ├─ fp-snake  ── fp-snake-game
-   ├─ fp-space
    └─ fp-sokoban
 ```
 
