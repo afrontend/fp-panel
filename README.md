@@ -62,7 +62,7 @@ Refer to [DOCUMENTATION.md](DOCUMENTATION.md) for the full API reference.
 
 ## License
 
-MIT © [Bob Hwang](https://afrontend.github.io)
+MIT © [afrontend](https://afrontend.github.io)
 
 [npm-image]: https://badge.fury.io/js/fp-panel.svg
 [npm-url]: https://npmjs.org/package/fp-panel
