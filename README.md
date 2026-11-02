@@ -19,6 +19,20 @@ These games use fp-panel.
 - [tetris](https://github.com/afrontend/fp-tetris)
 - [snake](https://github.com/afrontend/fp-snake)
 - [block](https://github.com/afrontend/fp-block)
+- [sokoban](https://github.com/afrontend/fp-sokoban)
+
+## Contract tests for game libraries
+
+`fp-panel/testing` registers the common game API checks (exports, init size, pause, tick, rendering helpers, snapshot round trip) as a test suite. It uses the runner's global `describe` / `it` / `expect` (vitest `globals: true` or jest).
+
+```js
+// lib/__tests__/contract.test.js
+const { runGameContract } = require("fp-panel/testing");
+
+runGameContract(require("../index.js"), { name: "fp-tetris", pauseKey: "p" });
+// level-based, turn-based game
+runGameContract(require("../index.js"), { name: "fp-sokoban", sizedInit: false, turnBased: true });
+```
 
 ## How it works
 

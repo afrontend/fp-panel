@@ -20,8 +20,8 @@ A change here reaches the games only after a new npm version is published and ea
 ## Commands
 
 ```sh
-npm test          # jest
-npm run coverage  # jest --coverage
+npm test          # vitest run
+npm run coverage  # vitest run --coverage
 npm run doc       # regenerate DOCUMENTATION.md (docs/overview.md + jsdoc2md of lib/index.js)
 ```
 
@@ -30,7 +30,8 @@ npm run doc       # regenerate DOCUMENTATION.md (docs/overview.md + jsdoc2md of 
 ## Layout
 
 - `lib/index.js` — the whole library (CJS, hand-written source, not build output)
-- `lib/__tests__/index.test.js` — jest tests
+- `lib/testing.js` — `runGameContract(game, options)`, the shared contract suite every game library runs (exported as `fp-panel/testing`; changing it changes what all games must satisfy)
+- `lib/__tests__/` — vitest tests (`globals: true`, `vitest.config.js`); excluded from the npm package by `files`
 - `.github/workflows/test.yml` — `npm test` on push to `master` and on PRs; actions are SHA-pinned and updated via Dependabot (`.github/dependabot.yml`), Node 24
 - `docs/overview.md` — narrative docs prepended to `DOCUMENTATION.md`
 
