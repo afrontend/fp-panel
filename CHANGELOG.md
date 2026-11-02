@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+### Fixed
+- `runGameContract` checks `isBlank` with a cell (`{ color }`) instead of the whole state, matching how every game exports it (`isBlankItem`).
+
+## [0.1.6] - 2026-11-02
+
 ### Added
 - `fp-panel/testing` — `runGameContract(game, options)` registers the shared game API contract tests for fp-* game libraries.
 - `exports` map: `fp-panel`, `fp-panel/testing`, `fp-panel/lib/*`, `fp-panel/package.json`.
